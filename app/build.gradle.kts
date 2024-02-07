@@ -7,6 +7,10 @@ android {
     namespace = "com.st991629230.basketballdemobycuteagrawal"
     compileSdk = 34
 
+    buildFeatures{
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.st991629230.basketballdemobycuteagrawal"
         minSdk = 24
