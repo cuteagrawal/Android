@@ -2,11 +2,14 @@ package com.st991629230.basketballdemobycuteagrawal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.st991629230.basketballdemobycuteagrawal.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class BasketBallDemoByCuteAgrawal : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -24,10 +27,10 @@ class MainActivity : AppCompatActivity() {
 
 
         // Score for Team A
-        displayForTeamA(scoreModel.scoreTeamA)
+        displayForTeamA(scoreModel.getScoreForTeamA())
 
         // Score for Team B
-        displayForTeamB(scoreModel.scoreTeamB)
+        displayForTeamB(scoreModel.getScoreForTeamB())
 
 
     }
@@ -35,9 +38,9 @@ class MainActivity : AppCompatActivity() {
 
     //functions for Team A
     fun addOneForTeamA(v: View?) {
-        scoreModel.scoreTeamA =
-            scoreModel.scoreTeamA + 1
-        displayForTeamA(scoreModel.scoreTeamA)
+        scoreModel.setScoreForTeamA(scoreModel.getScoreForTeamA() + 1)
+        displayForTeamA(scoreModel.getScoreForTeamA())
+
     }
 
     fun addTwoForTeamA(v: View?) {
@@ -58,9 +61,8 @@ class MainActivity : AppCompatActivity() {
 
     //functions for Team B
     fun addOneForTeamB(v: View?) {
-        scoreModel.scoreTeamB =
-            scoreModel.scoreTeamB + 1
-        displayForTeamB(scoreModel.scoreTeamB)
+        scoreModel.setScoreForTeamB(scoreModel.getScoreForTeamB() + 1)
+        displayForTeamB(scoreModel.getScoreForTeamB())
     }
 
     fun addTwoForTeamB(v: View?) {
@@ -81,10 +83,20 @@ class MainActivity : AppCompatActivity() {
     // Reset Score Method
     fun resetScore(v: View?){
 
-        scoreModel.scoreTeamA = 0
-        displayForTeamA(scoreModel.scoreTeamA)
+        scoreModel.setScoreForTeamA(0)
+        displayForTeamA(scoreModel.getScoreForTeamA())
 
-        scoreModel.scoreTeamB = 0
-        displayForTeamB(scoreModel.scoreTeamB)
+        scoreModel.setScoreForTeamB(0)
+        displayForTeamB(scoreModel.getScoreForTeamB())
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.basketballmenu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
