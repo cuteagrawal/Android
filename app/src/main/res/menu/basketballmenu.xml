@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/reset_score"
-        android:title="Reset Scores" />
+    <item android:id="@+id/new_game"
+        android:title="Start a New gane" />
     <item android:id="@+id/exit"
         android:title="Exit" />
 </menu>

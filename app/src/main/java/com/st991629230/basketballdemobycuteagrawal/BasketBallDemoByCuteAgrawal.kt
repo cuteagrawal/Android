@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.st991629230.basketballdemobycuteagrawal.databinding.ActivityMainBinding
 
@@ -19,8 +20,6 @@ class BasketBallDemoByCuteAgrawal : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        //setContentView(R.layout.activity_main)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -81,7 +80,7 @@ class BasketBallDemoByCuteAgrawal : AppCompatActivity() {
     }
 
     // Reset Score Method
-    fun resetScore(v: View?){
+    fun resetScore(v: View?) {
 
         scoreModel.setScoreForTeamA(0)
         displayForTeamA(scoreModel.getScoreForTeamA())
@@ -90,8 +89,13 @@ class BasketBallDemoByCuteAgrawal : AppCompatActivity() {
         displayForTeamB(scoreModel.getScoreForTeamB())
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
+    fun resetScores() {
+
+        scoreModel.setScoreForTeamA(0)
+        displayForTeamA(scoreModel.getScoreForTeamA())
+
+        scoreModel.setScoreForTeamB(0)
+        displayForTeamB(scoreModel.getScoreForTeamB())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -99,4 +103,46 @@ class BasketBallDemoByCuteAgrawal : AppCompatActivity() {
         inflater.inflate(R.menu.basketballmenu, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.new_game -> {
+
+
+                val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+                builder
+                    .setMessage("Are you sure you want to start a New Game?")
+                    .setTitle("Start a New Game?")
+                    .setPositiveButton("Yes") { dialog, which ->
+                        resetScores()
+                    }
+                    .setNegativeButton("No") { dialog, which ->
+
+                    }
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
+
+                return true
+            }
+            R.id.exit -> {
+
+                val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+                builder
+                    .setMessage("Are you sure you want to Exit the Game?")
+                    .setTitle("Exit Game?")
+                    .setPositiveButton("Exit") { dialog, which ->
+                        finish()
+                    }
+                    .setNegativeButton("Go Back") { dialog, which ->
+
+                    }
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
+
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
 }
+
